@@ -42,31 +42,52 @@ int resalt = 0;
  }   return resalt;
  }
 
- int MinNamber(int[,] array) {
- int sum = 0;
- int res = Metretern(array);  
+ int[] SumNamberArray(int[,] array) {
+ int[] SumArray = new int[array.GetLength(0)];
+ for (int i = 0; i < array.GetLength(0); i++)
+ {
+     int sum = 0;
+     for (int j = 0; j < array.GetLength(1); j++)
+     {
+         sum +=array[i,j];
+     }
+     SumArray[i] = sum;
 
+ } return SumArray;
+ }
 
-for (int i = 0; i < array.GetLength(0);)
-{    
-     
+ int Count (int[] SumArray, int resalt) {
+int min = resalt;
+for (int i = 0; i < SumArray.Length; i++)
+{
+    if(min >= SumArray[i]) min = SumArray[i];
+} return min;
+
+ }
+
+int CountString(int[] SumArray, int min) {
+int namber = 0;
+for (int i = 0; i < SumArray.Length; i++)
+{
+    if(SumArray[i] == min) namber = i + 1;
     
-    for (int j = 0; j < array.GetLength(1); j++)
-    {
-       
-           sum += array[i,j];
-           return sum;
-           if (res > sum) res = sum;
- 
-    } 
- 
-} return res;
-}
+} return namber;
+
+ }
+
 
 
 int[,] array = GenAr();
 PrintAr(array);
 int resalt = Metretern(array);
 Console.WriteLine("Первая сумма -" +  resalt);
-int res = MinNamber(array);
-Console.WriteLine("Минимальная сумма -" +  res);
+
+int[] SumArray = SumNamberArray(array);
+for (int i = 0; i < SumArray.Length; i++)
+{
+    Console.Write(SumArray[i] + " ");
+}
+int min1 = Count (SumArray, resalt);
+Console.WriteLine("Минимальная сумма - " + min1);
+int namber = CountString(SumArray, min1);
+Console.WriteLine("Строка с минимальной  суммой - " + namber);
